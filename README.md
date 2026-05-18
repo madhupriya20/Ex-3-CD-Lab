@@ -1,5 +1,5 @@
 # Ex-3-RECOGNITION-OF-A-VALID-ARITHMETIC-EXPRESSION-THAT-USES-OPERATOR-AND-USING-YACC
-# Date:
+# Date:18-05-2025
 # AIM
 To write a yacc program to recognize a valid arithmetic expression that uses operator +,- ,* and /.
 # ALGORITHM
@@ -12,6 +12,71 @@ To write a yacc program to recognize a valid arithmetic expression that uses ope
 7.	Compile these with the C compiler as gcc lex.yy.c y.tab.c
 8.	Enter an arithmetic expression as input and the tokens are identified as output.
 # PROGRAM
+# .l file:
+```
+%{
+#include "exp3_0177.tab.h"
+#include <stdio.h>
+%}
+
+%%
+
+[0-9]+                  { return NUMBER; }
+[a-zA-Z][a-zA-Z0-9]*    { return ID; }
+
+"+"     { return '+'; }
+"-"     { return '-'; }
+"*"     { return '*'; }
+"/"     { return '/'; }
+"("     { return '('; }
+")"     { return ')'; }
+
+[ \t]   ;          /* ignore spaces */
+\n      return 0;
+
+.       return yytext[0];
+
+%%
+
+int yywrap()
+{
+    return 1;
+}
+```
+# .y file:
+```
+%{
+#include "exp3_0177.tab.h"
+#include <stdio.h>
+%}
+
+%%
+
+[0-9]+                  { return NUMBER; }
+[a-zA-Z][a-zA-Z0-9]*    { return ID; }
+
+"+"     { return '+'; }
+"-"     { return '-'; }
+"*"     { return '*'; }
+"/"     { return '/'; }
+"("     { return '('; }
+")"     { return ')'; }
+
+[ \t]   ;          /* ignore spaces */
+\n      return 0;
+
+.       return yytext[0];
+
+%%
+
+int yywrap()
+{
+    return 1;
+}
+```
+
 # OUTPUT
+<img width="1093" height="344" alt="image" src="https://github.com/user-attachments/assets/6e750a8f-9b01-4aef-bf8e-76979805dbd3" />
+
 # RESULT
 A YACC program to recognize a valid arithmetic expression that uses operator +,-,* and / is executed successfully and the output is verified.
